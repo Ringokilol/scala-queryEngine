@@ -11,10 +11,12 @@ create database
   $sudo -u postgres createdb `databaseName`
 
 check if working
-  $psql -d test
+  $psql -d `databaseName`
+
+where `databaseName` is the name you gave your database.
 
 modif config file for postgresql:
--change `databaseName` and `user` in api/conf/application.conf
+-change `databaseName` and `user` in api/conf/application.conf with the previously entered `databaseName` and `user`
 
 generate http secret key
   $sbt
