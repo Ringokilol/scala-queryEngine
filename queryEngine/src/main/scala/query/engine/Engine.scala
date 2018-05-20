@@ -41,7 +41,7 @@ object Engine {
   def queryCountry(countryToSearch: String) = {
     val q = quote {
       query[Countries]
-        .filter(e => e.name.toLowerCase().startsWith(lift(countryToSearch)) || e.code.toLowerCase() == lift(countryToSearch))
+        .filter(e => ((lift(countryToSearch.length()) > 2) && e.name.toLowerCase().startsWith(lift(countryToSearch))) || e.code.toLowerCase() == lift(countryToSearch))
         .join(
           query[Runways].join(query[Airports]).on(_.airport_ref == _.id)
         ).on(_.code == _._2.iso_country)

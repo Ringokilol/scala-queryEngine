@@ -1,5 +1,6 @@
 =================================== project ===================================
-Rest API for the query engine that cat done reports and query about airports
+Rest API for the query engine that can done reports and query about airports
+It will return the results as a json list
 
 ================================ How to install ===============================
 install postgresql
@@ -11,7 +12,8 @@ create database
   $sudo -u postgres createdb `databaseName`
 
 check if working
-  $psql -d `databaseName`
+  $ psql -d `databaseName`
+  $ systemctl status postgresql
 
 where `databaseName` is the name you gave your database.
 
