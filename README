@@ -1,0 +1,52 @@
+=================================== project ===================================
+Rest API for the query engine that cat done reports and query about airports
+
+================================ How to install ===============================
+install postgresql
+install coursier
+  $ curl -L -o coursier https://git.io/vgvpD && chmod +x coursier && ./coursier --help
+
+create database
+  $sudo -u postgres createuser `user`
+  $sudo -u postgres createdb `databaseName`
+
+check if working
+  $psql -d test
+
+modif config file for postgresql:
+-change `databaseName` and `user` in api/conf/application.conf
+
+generate http secret key
+  $sbt
+  sbt_console$ playGenerateSecret
+  (copy result to 'play.http.secret.key' in api/conf/application.conf)
+
+init database
+run init.sql script in queryEngine/src/main/resources/
+  $cd queryEngine/src/main/resources
+  $psql -d `databaseName` -f `pathTo/init.sql`
+
+run the project
+  $cd -
+  $sbt run
+  $sbt test
+
+Once the project is run, you can type:
+  $curl -X GET http://localhost:9000/
+to get all the possible commands of the API
+
+Or you can open a web browser and go to http://localhost:9000/
+
+=============================== Known error ==================================
+if "HikariPool-1 - Exception during pool initialization.
+    org.postgresql.util.PSQLException: The server requested password-based
+    authentication, but no password was provided"
+  is show when "$sbt run",
+
+  you should add password to the user
+    $sudo -u postgres psql
+    psql$ ALTER USER `user` WITH PASSWORD 'pwd';
+
+  where `user` and `databaseName` are the names previously defined
+  and `pwd` must be given inside simple quotes.
+  Then add the `password` field into api/conf/application.conf with `pwd`

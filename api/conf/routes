@@ -1,0 +1,9 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+
+GET     /                           controllers.HomeController.index
+GET     /reportNbAirports           controllers.HomeController.reportNbAirports
+GET     /reportRunwaysType          controllers.HomeController.reportRunwaysType
+GET     /reportCommonRunwaysLat     controllers.HomeController.reportCommonRunwaysLat
+GET     /queryCountry/:query        controllers.HomeController.queryCountry(query)
